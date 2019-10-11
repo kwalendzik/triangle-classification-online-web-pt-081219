@@ -7,17 +7,16 @@ class Triangle
    @side_three = side_three
  end
  
- def kind(person)
-   self.partner = person
-   if person.class != Person
-     begin
-       raise PartnerError
-     rescue PartnerError => error
-         puts error.message
-     end
-   else
-     person.partner = self
-   end
+ def kind
+   if side_one + side_two <= side_three || side_3_length + side_2_length <= side_1_length || side_1_length + side_3_length <= side_2_length || side_1_length <= 0 || side_2_length <= 0 || side_3_length <=0
+      raise TriangleError
+    elsif side_1_length == side_2_length && side_1_length == side_3_length
+      return :equilateral
+    elsif side_1_length == side_2_length || side_2_length == side_3_length || side_1_length == side_3_length
+      return :isosceles
+    elsif side_1_length != side_2_length && side_1_length != side_3_length && side_2_length != side_3_length
+      return :scalene
+    end
  end
  
  class TriangleError < StandardError
